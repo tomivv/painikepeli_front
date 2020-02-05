@@ -1,3 +1,17 @@
 .App {
   text-align: center;
 }
+
+.btn {
+  border: none;
+  font-size: 16px;
+  padding: 10px 15px;
+  background-color: #2196F3;
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.main {
+  padding-top: 5em;
+}

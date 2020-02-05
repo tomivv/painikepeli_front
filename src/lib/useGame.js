@@ -3,17 +3,17 @@ import { useState, useEffect } from "react";
 export default function useGame() {
     let currentPoints = parseInt(localStorage.getItem('points'));
     const [points, setPoints] = useState(null);
+    const [other, setOther] = useState({});
     const [newGame, setNewGame] = useState(false);
 
     async function handlePoints() {
       const asd = await fetch('http://localhost:3001/game').then((response) => {
         return response.json();
       })
-
       if(asd.won) {
         localStorage.setItem('points', currentPoints + asd.points - 1)
         setPoints(currentPoints + asd.points - 1)
-        // sit joku ilmotus tähän kans
+        setOther(asd);
       } else {
         if(points === 1 || currentPoints === 1) {
           setNewGame(true);
@@ -22,6 +22,7 @@ export default function useGame() {
         } else {
           localStorage.setItem('points', currentPoints - 1)
           setPoints(currentPoints - 1)
+          setOther(asd);
         }
         // ilmotus tarvittavista pisteistä
       }
@@ -46,5 +47,5 @@ export default function useGame() {
       }
     }, [currentPoints]);
     
-    return { points, handlePoints, newGame, startNewGame };
+    return { points, handlePoints, newGame, startNewGame, other };
 }

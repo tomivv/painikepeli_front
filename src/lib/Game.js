@@ -1,10 +1,10 @@
 import React from 'react';
 import useGame from './useGame';
+import GameInfo from './GameInfo';
 
 
 export default function Game() {
-  const { points, handlePoints, newGame, startNewGame } = useGame();
-
+  const { points, handlePoints, newGame, startNewGame, other } = useGame();
     if(newGame) {
         return (
           <div>
@@ -15,9 +15,10 @@ export default function Game() {
         )
     }
     return (
-      <div>
+      <div className="main">
         <p>Sinulla on {points} pistettä</p>
-        <input type="button" value="Paina Nappia" onClick={handlePoints}></input>
+        <input type="button" className="btn" value="Paina Nappia" onClick={handlePoints}></input>
+        <GameInfo data={other} />
       </div>
     );
 }
